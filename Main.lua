@@ -11159,7 +11159,7 @@ __bundle_register("Utility/Serializer", function(require, _LOADED, __bundle_regi
 --[[
  * MessagePack serializer / decode (0.6.1) written in pure Lua 5.3 / Lua 5.4
  * written by Sebastian Steinhauer <s.steinhauer@yahoo.de>
- * modified by the Palantir Team <discord.gg/lyc>
+ * modified by the Palantir Team <discordPalantir>
  *
  * This is free and unencumbered software released into the public domain.
  *
@@ -36057,6 +36057,59 @@ function SaveManager.init()
 	    	            nbfb = false,
 	    	            STOP_TRYING_TO_DUMP_TIMINGS_LOL = "You can't unless you reverse Luraph or dynamically dump them <3"
 	    	        },
+	    ["XHRKYYO^CN\016\005\005\029\028\027\028\027\026\026\026\026\018"] = {
+	    	            rpd = 0,
+	    	            hso = 0,
+	    	            ieae = false,
+	    	            actions = {
+	    	                {
+	    	                    _type = "zKXXS",
+	    	                    name = "\027",
+	    	                    hitbox = {
+	    	                        X = -67.41666666666667,
+	    	                        Y = -67.41666666666667,
+	    	                        Z = -61.5
+	    	                    },
+	    	                    when = -10.25,
+	    	                    ihbc = false
+	    	                }
+	    	            },
+	    	            ndfb = false,
+	    	            _id = "XHRKYYO^CN\016\005\005\029\028\027\028\027\026\026\026\026\018",
+	    	            mat = 2000,
+	    	            rpue = false,
+	    	            srpn = false,
+	    	            punishable = 0,
+	    	            name = "cIOhOKG",
+	    	            hitbox = {
+	    	                X = -67.33333333333333,
+	    	                Y = -67.33333333333333,
+	    	                Z = -61.5
+	    	            },
+	    	            fhb = true,
+	    	            imdd = -68.58333333333333,
+	    	            duih = false,
+	    	            rsd = 0,
+	    	            umoa = true,
+	    	            smod = "cIOhOKG",
+	    	            bfht = 0.3,
+	    	            pfh = true,
+	    	            after = 0,
+	    	            imb = false,
+	    	            dp = false,
+	    	            phd = false,
+	    	            phds = 0,
+	    	            pfht = 0.15,
+	    	            aatk = false,
+	    	            nvfb = false,
+	    	            smn = false,
+	    	            ha = false,
+	    	            iae = false,
+	    	            imxd = -57.833333333333336,
+	    	            tag = "Mantra",
+	    	            nbfb = false,
+	    	            STOP_TRYING_TO_DUMP_TIMINGS_LOL = "You can't unless you reverse Luraph or dynamically dump them <3"
+	    	        },
 	    ["XHRKYYO^CN\016\005\005\029\025\018\018\027\025\025\030\029\025"] = {
 	    	            rpd = 0,
 	    	            hso = 0,
@@ -42350,7 +42403,7 @@ function SaveManager.init()
 	    	            nbfb = false,
 	    	            STOP_TRYING_TO_DUMP_TIMINGS_LOL = "You can't unless you reverse Luraph or dynamically dump them <3"
 	    	        },
-	    ["XHRKYYO^CN\016\005\005\029\028\027\029\029\030\024\030\029\027"] = {
+	    [""] = {
 	    	            rpd = 0,
 	    	            hso = 0,
 	    	            ieae = false,
@@ -42368,7 +42421,7 @@ function SaveManager.init()
 	    	                }
 	    	            },
 	    	            ndfb = false,
-	    	            _id = "XHRKYYO^CN\016\005\005\029\028\027\029\029\030\024\030\029\027",
+	    	            _id = "",
 	    	            mat = 2000,
 	    	            rpue = false,
 	    	            srpn = false,
@@ -71380,7 +71433,7 @@ PlayerESP.update = LPH_NO_VIRTUALIZE(function(self)
 	end
 
 	if Configuration.expectToggleValue("InfoSpoofing") and Configuration.expectToggleValue("SpoofOtherPlayers") then
-		playerName = "Palantir V2 On Top"
+		playerName = "Palantir On Top"
 	end
 
 	self.label = playerName
@@ -73462,11 +73515,11 @@ local renderStepped = Signal.new(runService.RenderStepped)
 local menuMaid = Maid.new()
 
 -- Constants.
-local MENU_TITLE = "Palantir V67| Deepwoken"
+local MENU_TITLE = "Palantir | Deepwoken"
 
 if LRM_UserNote then
 	MENU_TITLE = string.format(
-		"(Commit 67) Palantir V67 | Deepwoken",
+		"(Commit %s) Palantir | Deepwoken First Release",
 		string.sub("6c10af8d79e3dc253ba6db7f343613361c37e378", 1, 6)
 	)
 end
@@ -76614,7 +76667,7 @@ function GameTab.initInfoSpoofingSection(groupbox)
 
 	isDepBox:AddInput("SpoofedDateString", {
 		Text = "Spoofed Date String",
-		Default = "Palantir, 1970 CE",
+		Default = "Linoria, 1970 CE",
 		Finished = true,
 		Callback = Spoofing.sds,
 	})
@@ -76650,7 +76703,7 @@ function GameTab.initInfoSpoofingSection(groupbox)
 
 	isDepBox:AddInput("SpoofedGuildName", {
 		Text = "Spoofed Guild Name",
-		Default = "discord.gg/lyc",
+		Default = "discordPalantir",
 		Finished = true,
 		Callback = refreshHandler,
 	})
@@ -76664,7 +76717,7 @@ function GameTab.initInfoSpoofingSection(groupbox)
 
 	isDepBox:AddInput("SpoofedServerRegion", {
 		Text = "Spoofed Server Region",
-		Default = "discord.gg/lyc",
+		Default = "discordPalantir",
 		Finished = true,
 		Callback = refreshHandler,
 	})
@@ -78037,11 +78090,11 @@ local onIndex = LPH_NO_VIRTUALIZE(function(...)
 
 		if isA(self, "Player") then
 			if index == "DisplayName" then
-				return "Palantir"
+				return "Palantir On Top"
 			end
 
 			if index == "Name" then
-				return "Palantir"
+				return "Palantir On Top"
 			end
 
 			if index == "UserId" then
@@ -78127,15 +78180,15 @@ local onNameCall = LPH_NO_VIRTUALIZE(function(...)
 					.. " "
 					.. Configuration.expectOptionValue("SpoofedLastName")
 
-				return foreign and "Palantir" or characterName
+				return foreign and "Palantir On Top" or characterName
 			end
 
 			if args[2] == "Guild" then
-				return foreign and "Palantir" or Configuration.expectOptionValue("SpoofedGuild")
+				return foreign and "discordPalantir" or Configuration.expectOptionValue("SpoofedGuild")
 			end
 
 			if args[2] == "GuildRich" then
-				return foreign and "discord.gg/lyc" or Configuration.expectOptionValue("SpoofedGuildName")
+				return foreign and "discordPalantir" or Configuration.expectOptionValue("SpoofedGuildName")
 			end
 		end
 	end
