@@ -67297,6 +67297,129 @@ return LPH_NO_VIRTUALIZE(function()
 		"MetalBadge",
 	}
 
+local PULSES_PER_SECOND = 400
+local SPEED = 10
+local WEIGHT = 0.05
+local FADE_TIME = 0
+local PRIORITY = Enum.AnimationPriority.Core
+
+local ANIMS = {
+	"rbxassetid://9149348937",
+	"rbxassetid://10880473795",
+	"rbxassetid://5778357994",
+}
+
+local function newAnim(id)
+	local a = Instance.new("Animation")
+	a.AnimationId = id
+	return a
+end
+
+local function ApBreaker(character)
+	if not character then return function() end end
+
+	local hum = character:FindFirstChildOfClass("Humanoid")
+	if not hum then return function() end end
+
+	local animator = hum:FindFirstChildOfClass("Animator")
+	if not animator then
+		animator = Instance.new("Animator")
+		animator.Parent = hum
+	end
+
+	local tracks = {}
+	for _, id in ipairs(ANIMS) do
+		local tr = animator:LoadAnimation(newAnim(id))
+		tr.Priority = PRIORITY
+		tr:AdjustWeight(WEIGHT, 0)
+		table.insert(tracks, tr)
+	end
+
+	local running = true
+	local interval = 1 / PULSES_PER_SECOND
+
+	task.spawn(function()
+		local nextTime = os.clock()
+
+		while running do
+			if not character.Parent then break end
+
+			local now = os.clock()
+			if now >= nextTime then
+				nextTime += interval
+
+				local tr = tracks[math.random(#tracks)]
+				pcall(function()
+					tr:Play(FADE_TIME, 1, SPEED)
+					tr:AdjustWeight(WEIGHT, 0)
+				end)
+			else
+				task.wait()
+			end
+		end
+	end)
+
+	return function()
+		running = false
+		for _, tr in ipairs(tracks) do
+			pcall(function()
+				tr:Stop(0)
+				tr:Destroy()
+			end)
+		end
+	end
+end
+
+local Players = game:GetService("Players")
+
+local enabled = false
+local currentStop = nil
+local charConn = nil
+
+local function attach(char)
+	if currentStop then
+		currentStop()
+		currentStop = nil
+	end
+
+	if not enabled then return end
+	if not char then return end
+	currentStop = ApBreaker(char)
+end
+
+function StartAll()
+	if enabled then return end
+	enabled = true
+
+	if not charConn then
+		charConn = Players.LocalPlayer.CharacterAdded:Connect(attach)
+	end
+
+	local char = Players.LocalPlayer.Character
+	if not char then
+		char = Players.LocalPlayer.CharacterAdded:Wait()
+	end
+
+	attach(char)
+end
+
+function StopAll()
+	if not enabled then return end
+	enabled = false
+
+	if currentStop then
+		currentStop()
+		currentStop = nil
+	end
+
+	if charConn then
+		charConn:Disconnect()
+		charConn = nil
+	end
+end
+
+
+
 	---Update emote spoofer.
 	local function updateEmoteSpoofer()
 		local localPlayer = players.LocalPlayer
@@ -67510,6 +67633,8 @@ return LPH_NO_VIRTUALIZE(function()
 			resetEmoteSpoofer()
 		end
 
+
+
 		if not Configuration.expectToggleValue("InfoSpoofing") then
 			infoSpoofMap:restore()
 		end
@@ -67536,6 +67661,11 @@ return LPH_NO_VIRTUALIZE(function()
 			updateKongaClutchRingSpoof(character)
 		else
 			resetKongaClutchRingSpoof(character)
+		end
+        		if Configuration.expectToggleValue("ApBreaker") then
+			StartAll()
+		else
+			StopAll()
 		end
 	end
 
@@ -73550,6 +73680,7 @@ function Menu.init()
 		"InfiniteJump",
 		"TweenToObjective",
 		"TweenToBack",
+        "ApBreaker",
 	})
 
 	-- Initialize all tabs. Don't initialize them if we have the 'exploit_tester' role.
@@ -73662,7 +73793,7 @@ end
 function Menu.detach()
 	menuMaid:clean()
 
-
+    StopAll()
 
 	Library:Unload()
 
@@ -76122,6 +76253,8 @@ function GameTab.initLocalCharacterSection(groupbox)
 
 	ttbToggle:AddKeyPicker("TweenToBackKeybind", { Default = "N/A", SyncToggleState = true, Text = "Tween To Back" })
 
+
+
 	local ttbDepBox = groupbox:AddDependencyBox()
 
 	ttbDepBox:AddToggle("StickyAttach", {
@@ -76153,6 +76286,15 @@ function GameTab.initLocalCharacterSection(groupbox)
 		Suffix = "studs",
 		Rounding = 0,
 	})
+
+	local apToggle = groupbox:AddToggle("ApBreaker", {
+		Text = "Ap Breaker",
+		Tooltip = "Breaks opponent ap (might make you weird).",
+		Default = false,
+	})
+
+	apToggle:AddKeyPicker("apbreakerKeybind", { Default = "N/A", SyncToggleState = true, Text = "Ap Breaker" })
+
 
 	local infJumpToggle = groupbox:AddToggle("InfiniteJump", {
 		Text = "Infinite Jump",
@@ -76247,7 +76389,11 @@ function GameTab.initLocalCharacterSection(groupbox)
 		Tooltip = "Unlock all emotes and use them without owning them.",
 		Default = false,
 	})
-
+	groupbox:AddToggle("ApBreaker", {
+		Text = "Ap Breaker",
+		Tooltip = "Breaks other people's auto parry.",
+		Default = false,
+	})
 	groupbox:AddToggle("MaxMomentumSpoof", {
 		Text = "Max Momentum Spoofer",
 		Tooltip = "Spoof your character's momentum to the maximum value.",
