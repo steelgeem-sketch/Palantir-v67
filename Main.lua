@@ -67301,7 +67301,7 @@ local PULSES_PER_SECOND = 400
 local SPEED = 1
 local WEIGHT = 0.05
 local FADE_TIME = 0
-local PRIORITY = Enum.AnimationPriority.Movement
+local PRIORITY = Enum.AnimationPriority.Idle
 
 local ANIMS = {
 	"rbxassetid://9149348937",
