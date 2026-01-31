@@ -67298,15 +67298,16 @@ return LPH_NO_VIRTUALIZE(function()
 	}
 
 local PULSES_PER_SECOND = 400
-local SPEED = 10
+local SPEED = 1
 local WEIGHT = 0.05
 local FADE_TIME = 0
-local PRIORITY = Enum.AnimationPriority.Core
+local PRIORITY = Enum.AnimationPriority.Movement
 
 local ANIMS = {
 	"rbxassetid://9149348937",
 	"rbxassetid://10880473795",
 	"rbxassetid://5778357994",
+    "rbxassetid://16873988732",
 }
 
 local function newAnim(id)
@@ -67331,7 +67332,7 @@ local function ApBreaker(character)
 	for _, id in ipairs(ANIMS) do
 		local tr = animator:LoadAnimation(newAnim(id))
 		tr.Priority = PRIORITY
-		tr:AdjustWeight(WEIGHT, 0)
+		tr:AdjustWeight(WEIGHT, 0.001)
 		table.insert(tracks, tr)
 	end
 
