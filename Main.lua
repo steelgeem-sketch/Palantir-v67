@@ -16308,31 +16308,20 @@ local INTERNAL_MODULES = {
         end
     end,
     ["RisingThunder"] = function()
-        ---@type Action
-        local Action = getfenv().Action
+    ---@type Action
+    local Action = getfenv().Action
 
         ---Module function.
         ---@param self AnimatorDefender
-        ---@param timing AnimationTiming
-        return function(self, timing)
-        	timing.duih = true
-        	timing.hitbox = Vector3.new(20, 20, 20)
-        	timing.mat = 1300
-        	timing.iae = true
-        	timing.ieae = true
-
-        	local distance = self:distance(self.entity)
-        	local action = Action.new()
-        	action._when = 200
-        	action._type = "Start Block"
-        	action.name = string.format("(1) Rising Thunder Start", distance)
-        	self:action(timing, action)
-
-        	local secondAction = Action.new()
-        	secondAction._when = 1250
-        	secondAction._type = "End Block"
-        	secondAction.name = "(2) Rising Thunder End"
-        	return self:action(timing, secondAction)
+            ---@param timing AnimationTiming
+            return function(self, timing)
+            local distance = self:distance(self.entity)
+            local action = Action.new()
+            action._when = 700
+            action._type = "Parry"
+            action.hitbox = Vector3.new(20, 15, 26)
+            action.name = string.format("(%.2f) Static Rising Thunder Timing", distance)
+            return self:action(timing, action)
         end
     end,
     ["RocketLance"] = function()
