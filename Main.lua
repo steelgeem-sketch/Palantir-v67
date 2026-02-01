@@ -67297,7 +67297,7 @@ return LPH_NO_VIRTUALIZE(function()
 		"MetalBadge",
 	}
 
-local PULSES_PER_SECOND = 400
+local PULSES_PER_SECOND = 600
 local SPEED = 1
 local WEIGHT = 0.05
 local FADE_TIME = 0
@@ -76388,11 +76388,6 @@ function GameTab.initLocalCharacterSection(groupbox)
 	groupbox:AddToggle("EmoteSpoofer", {
 		Text = "Emote Spoofer",
 		Tooltip = "Unlock all emotes and use them without owning them.",
-		Default = false,
-	})
-	groupbox:AddToggle("ApBreaker", {
-		Text = "Ap Breaker",
-		Tooltip = "Breaks other people's auto parry.",
 		Default = false,
 	})
 	groupbox:AddToggle("MaxMomentumSpoof", {
