@@ -18227,7 +18227,7 @@ local INTERNAL_MODULES = {
 
         	if data.type == "Twinblade" then
         		-- Twinblade adjustment.
-        		action.hitbox = Vector3.new(data.length * 2.5, data.length * 2, data.length * 3.5)
+        		action.hitbox = Vector3.new(data.length * 2.6, data.length * 2.3, data.length * 3.6)
 
         		-- Create second action.
         		local secondAction = Action.new()
