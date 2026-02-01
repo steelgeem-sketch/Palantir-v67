@@ -65374,7 +65374,7 @@ function AnimatorDefender:pvalidate(track)
 
 	local isComingFromPlayer = players:GetPlayerFromCharacter(self.entity)
 
-	if isComingFromPlayer and track.WeightTarget <= 0.05 then
+	if isComingFromPlayer and track.WeightTarget <= 0.06 then
 		return false
 	end
 
